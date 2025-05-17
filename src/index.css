@@ -1,0 +1,167 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+}
+* {
+  color: #415971;
+}
+
+.movieList {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 60%;
+  max-width: 740px;
+  background-color: white;
+  border-right: 1px solid #ddd;
+  overflow-y: auto;
+}
+
+.controls {
+  display: flex;
+  padding: 10px;
+  border-bottom: 1px solid #f7f8fa;
+}
+.controls button {
+  margin-right: 10px;
+  text-align: center;
+  font-weight: 600;
+}
+.controls button,
+.controls input {
+  background-color: #fefefe;
+  border: solid 1px #cccccc;
+  border-radius: 4px;
+  padding: 10px 20px;
+}
+
+.controls input {
+  flex: 1;
+  background-image: url("assets/images/icon.png");
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  padding-left: 40px;
+  background-size: 20px;
+}
+
+.film-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.film-list tr td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  text-align: left;
+}
+
+.film-list tr.selected {
+  background-color: #e6f0ff;
+}
+
+.film-list tr:hover {
+  background-color: #f1f1f1;
+}
+
+.stars {
+  color: #f5a623 !important;
+  font-size: 14px;
+}
+
+.details {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+.film-details h2 {
+  margin-top: 0;
+}
+
+.poster-placeholder {
+  width: 160px;
+  height: 220px;
+  background-color: #ddd;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+  color: #555;
+}
+
+.badges {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.badges span {
+  background-color: #e9f0ff;
+  color: #004b99;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+.dark-mode * {
+  color: #e0e0e0;
+}
+
+.dark-mode .sidebar {
+  background-color: #1e1e1e;
+  border-right: 1px solid #333;
+}
+
+.dark-mode .controls {
+  border-bottom: 1px solid #2c2c2c;
+}
+
+.dark-mode .controls button,
+.dark-mode .controls input {
+  background-color: #2a2a2a;
+  border: solid 1px #444;
+  color: #e0e0e0;
+}
+
+.dark-mode .controls input {
+  background-image: url("assets/images/icon-dark.png");
+}
+
+.dark-mode .film-list tr td {
+  border-bottom: 1px solid #333;
+}
+
+.dark-mode .film-list tr.selected {
+  background-color: #2a3d5a;
+}
+
+.dark-mode .film-list tr:hover {
+  background-color: #2a2a2a;
+}
+
+.dark-mode .details {
+  background-color: #121212;
+}
+
+.dark-mode .poster-placeholder {
+  background-color: #333;
+  color: #ccc;
+}
+
+.dark-mode .badges span {
+  background-color: #2a3d5a;
+  color: #aaccff;
+}
