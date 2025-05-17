@@ -101,6 +101,7 @@ body {
   display: flex;
   gap: 10px;
   margin-top: 10px;
+  align-items: normal;
 }
 
 .badges span {
@@ -164,4 +165,79 @@ body {
 .dark-mode .badges span {
   background-color: #2a3d5a;
   color: #aaccff;
+}
+
+@media (max-width: 768px) {
+  .movieList {
+    height: auto;
+  }
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .controls button,
+  .controls input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .controls button {
+    width: 50%;
+  }
+
+  .sidebar {
+    border-right: none;
+    width: 50%;
+  }
+
+  .film-list {
+    display: block;
+  }
+
+  .film-list tr {
+    display: block;
+    background-color: white;
+    margin: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .film-list tr td {
+    display: block;
+    border: none;
+    padding: 8px 0;
+    text-align: left;
+  }
+
+  .film-list tr.selected {
+    background-color: #e6f0ff;
+  }
+
+  .film-list tr:hover {
+    background-color: #f9f9f9;
+  }
+
+  .details {
+    padding: 16px;
+  }
+
+  .badges {
+    flex-wrap: wrap;
+  }
+
+  .badges span {
+    width: 100%;
+  }
+
+  .dark-mode .film-list tr {
+    background-color: #1e1e1e;
+    box-shadow: none;
+  }
+
+  .dark-mode .film-list tr:hover {
+    background-color: #2a2a2a;
+  }
 }

@@ -1,60 +1,57 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, AppDispatch } from "./store";
+import { setFilms, selectFilm } from "./store/filmsSlice";
+import { toggleDarkMode, setFilter } from "./store/uiSlice";
+
+const filmRatings: Record<number, number> = {
+  1: 5,
+  2: 6,
+  3: 7,
+  4: 8,
+  5: 9,
+  6: 7,
+};
+
+const getStars = (count: number) => "★".repeat(count) + "☆".repeat(10 - count);
 
 const App = () => {
-  const [films, setFilms] = useState([]);
-  const [selectedFilm, setSelectedFilm] = useState(null);
-  const [filter, setFilter] = useState("");
-  const [darkMode, setDarkMode] = useState(
-    localStorage.getItem("darkMode") ?? "false"
-  );
+  const dispatch = useDispatch<AppDispatch>();
 
-  useEffect(() => {
-    localStorage.setItem("darkMode", darkMode);
-  }, [darkMode]);
+  const { films, selectedFilm } = useSelector(
+    (state: RootState) => state.films
+  );
+  const { darkMode, filter } = useSelector((state: RootState) => state.ui);
 
   useEffect(() => {
     axios
       .get("https://swapi.py4e.com/api/films/?format=json")
       .then((response) => {
         const sorted = response.data.results.sort(
-          (a, b) => a.episode_id - b.episode_id
+          (a: any, b: any) => a.episode_id - b.episode_id
         );
-        setFilms(sorted);
-        setSelectedFilm(sorted[0]);
+        dispatch(setFilms(sorted));
       });
-  }, []);
-
-  const getStars = (count) => "★".repeat(count) + "☆".repeat(10 - count);
-
-  const filmRatings = {
-    1: 5,
-    2: 6,
-    3: 7,
-    4: 8,
-    5: 9,
-    6: 7,
-  };
+  }, [dispatch]);
 
   const filteredFilms = films.filter((f) =>
     f.title.toLowerCase().includes(filter.toLowerCase())
   );
 
   return (
-    <div className={`app ${darkMode == "true" ? "dark-mode" : ""}`}>
+    <div className={`app ${darkMode ? "dark-mode" : ""}`}>
       <div className="controls">
         <button>Sort by...</button>
-        <button
-          onClick={() => setDarkMode(darkMode == "false" ? "true" : "false")}
-        >
-          {darkMode == "true" ? "☀️ Light Mode" : "🌙 Dark Mode"}
+        <button onClick={() => dispatch(toggleDarkMode())}>
+          {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
         </button>
 
         <input
           type="text"
           placeholder="Type to search..."
           value={filter}
-          onChange={(e) => setFilter(e.target.value)}
+          onChange={(e) => dispatch(setFilter(e.target.value))}
         />
       </div>
       <div className="movieList">
@@ -69,7 +66,7 @@ const App = () => {
                       ? "selected"
                       : ""
                   }
-                  onClick={() => setSelectedFilm(film)}
+                  onClick={() => dispatch(selectFilm(film))}
                 >
                   <td>
                     <strong>EPISODE {film.episode_id}</strong>
